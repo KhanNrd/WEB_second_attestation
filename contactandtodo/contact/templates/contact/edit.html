@@ -1,0 +1,27 @@
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<h1> Edit person</h1>
+<form action = "{% url 'contact:save' id %}" method = "post"class="needs-validation">
+  {% csrf_token %}
+  <div class="col-md-6 mb-3">
+    <label for="name">Name</label>
+    <input class="form-control" type = "text" name="person_name" id = "person_name" value = "{{name}}"/>
+  </div>
+  <br/>
+  <div class="col-md-6 mb-3">
+    <label for="phone">Phone</label>
+    <input class="form-control" type = "text" name="person_phone" id = "person_phone" value = "{{phone}}"/>
+  </div>
+  <br/>
+  <div class="col-md-6 mb-3">
+    <label for="photo">Photo</label>
+    <input class="form-control" type = "text" name="person_photo" id = "person_photo" value = "{{photo}}"/>
+  </div>
+  <br/>
+  <input type = "submit" value = "Submit" class="btn btn-primary btn-lg "/>
+</form>
+<form action = "{% url 'contact:delete' id%}" method = "post">
+  {% csrf_token %}
+  <input type = "submit" value = "Delete" class="btn btn-primary btn-lg " />
+</form>

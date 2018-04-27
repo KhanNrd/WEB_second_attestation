@@ -1,0 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'contact/style.css' %}" />
+<h1>Contacts</h1>
+<ul class="col-md-4">
+  {% for person in person_list%}
+  <li class="card mb-4 box-shadow" ><a href = "{% url 'contact:edit' person.id%}">
+    <div class="row">
+      <img src="{{ person.person_photo }}" style="height: 100px; width: 100px; margin: auto; margin-left:20px;"/>
+      <div class="card-body">
+        <p class="lead text-muted">Person name:</p>
+        <p class="card-text">
+          {{person.person_name}}
+        </p>
+        <p class="lead text-muted">Person phone:</p>
+        <p class="card-text">
+          {{person.person_phone}}
+        </p>
+    </div>
+  </div>
+  </a></li>
+  {% endfor %}
+</ul>
+
+<form action = "{% url 'contact:newperson' %}" method = "post">
+  {% csrf_token %}
+  <input type="submit" value="Add person" class="btn btn-primary btn-lg"/>
+</form>

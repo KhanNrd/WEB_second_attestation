@@ -1,0 +1,23 @@
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<h1> Edit a todo</h1>
+<form action = "{% url 'todo_demo:save' %}" method = "post" class="needs-validation">
+  {% csrf_token %}
+  <div class="col-md-6 mb-3">
+    <label for="text">Text</label>
+    <input class="form-control" type = "text" name="todo_text" id = "todo_text" value = "{{text}}"/>
+  </div>
+  <br/>
+  {% for status in statusList%}
+  <input type = "radio" name = "status" id = "status{{forloop.counter}}" value = "{{status.id}}"/>
+  <label for="status{{forloop.counter}}">{{status.status_text}}</label>
+  <br/>
+  {%endfor%}
+  <input type = "submit" value = "Submit" class="btn btn-primary btn-lg " />
+
+</form>
+<form action = "{% url 'todo_demo:delete' id%}" method = "post" >
+  {% csrf_token %}
+  <input type = "submit" value = "Delete" class="btn btn-primary btn-lg "/>
+</form>

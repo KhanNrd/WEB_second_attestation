@@ -1,0 +1,28 @@
+{% extends "../contactandtodo/templates/base.html" %}
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'todo_demo/style.css' %}" />
+{% block content %}
+<h1>Todo</h1>
+<ul class="col-md-4">
+  {% for item in todo_list%}
+  <li class="card mb-4 box-shadow"><a href = {% url 'todo_demo:edit' item.id %}>
+    <div class="card-body">
+      <p class="lead text-muted">Text:</p>
+      <p class="card-text">
+        {{item.todo_text}}
+      </p>
+      <p class="lead text-muted">Status:</p>
+      <p class="card-text">
+        {{item.todo_status}}
+      </p>
+  </div>
+
+   </a> </li>
+  {% endfor %}
+</ul>
+<form action = "{% url 'todo_demo:TodoItem' %}" method = "post">
+  {% csrf_token %}
+  <input type="submit" value="Add" class="btn btn-primary btn-lg "/>
+</form>
+{% endblock content %}
