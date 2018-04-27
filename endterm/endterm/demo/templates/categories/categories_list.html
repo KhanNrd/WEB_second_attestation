@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+
+  
+{% block content %}
+      
+      <div>
+        <h1>
+          {% if categories_list|length > 1 %}
+            {{categories_list|length}} categories
+          {% elif categories_list|length == 1 %}
+            {{categories_list|length}} category
+          {% else %}
+            categories list empty
+          {% endif %}
+        </h1>
+        <a href="{%url 'new_category' %}" role="button">Add new category</a>
+        <br/>
+        <br/>
+        {% for category in categories_list %}
+          <div>
+            <div>
+              <h2><a href="{% url 'categories_detail' category_id=category.id%}">{{category}}</a></h2>
+              <div>
+                <a href="{%url 'change_category' category_id=category.id%}" role="button">Edit</a>
+                <a href="{% url 'delete_category' category_id=category.id%}" role="button">Delete</a>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+      </div>
+
+{% endblock content %}
